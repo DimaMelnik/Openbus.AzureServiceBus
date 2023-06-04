@@ -18,7 +18,7 @@ Configuration section in appsttings.json
 ```
 Or with sessions
 ```
-"ServiceBusOrderSessionss": {
+"ServiceBusOrderSessions": {
    "ConnectionString": "xxx",
    "Topic": "order",
    "Subscription": "test",
@@ -106,10 +106,9 @@ For each message you can register multiple retry strategies for different type o
         c.SetImediateRetryOn<ApiCallException>();
 	})
 ```
-Exponential retry in this example will retry 10 times with wait (20,40,80,...,1280,1800,1800,1800)sec between retries.
-When deciding what strategy to execute for exception it search for exact match if not found looking for first strategy for the type exception derived from.
-For instance previous registration exception on ApiCallException will retry imediate all the rest will retry exponentially.
-For Imediate retry it rely on maxDelevery settings of service bus
+In this example, the exponential retry strategy is applied, which attempts to retry a total of 10 times with progressively increasing waits between retries (20, 40, 80, ..., 1280, 1800, 1800, 1800 seconds). When determining the appropriate strategy for an exception, the system first searches for an exact match. If not found, it looks for the first strategy associated with an exception derived from the original exception type.
+
+For example, if a previous registration exception occurs in the context of an ApiCallException, an immediate retry will be performed. For all other exceptions, an exponential retry will be applied. The immediate retry strategy relies on the maxDelivery settings of the service bus.
 
 # Message converters
 For each message define converter that describe conversion Model<->ServiceBusTransport
@@ -171,7 +170,7 @@ implement interface IOnDeadLetterMessageCallback to receive callback on OnDeadLe
 
     public async Task OnDeadLetterMessage(Exception ex, CancellationToken cancellationToken)
     {
-            _logger.LogInformation("Dead Letter Message {ex.Message}", ex.Message);
+        _logger.LogInformation("Dead Letter Message {ex.Message}", ex.Message);
     }
 }
 ```
@@ -195,9 +194,9 @@ private IServiceBusMessageSender<IOrderQueue> serviceBusMessageSenderQueue
 ...
 
 await _serviceBusMessageSenderQueue.SendAsync(new TestEvent()
-                    {
-                       ....
-                    }, cancelationToken);
+    {
+        ....
+    }, cancelationToken);
 
 ```
 
