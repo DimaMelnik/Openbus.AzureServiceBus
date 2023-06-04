@@ -1,0 +1,38 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: .NET
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+    - name: Set package version
+      id: version
+      run: |
+          # Extract x.y from the package version
+          PACKAGE_VERSION=$(cat ./src/Openbus.AzureServiceBus/Openbus.AzureServiceBus.csproj | grep -oPm1 "(?<=<Version>)[^<]+")
+          MAJOR_MINOR_VERSION=$(echo $PACKAGE_VERSION | cut -d. -f1-2)
+          echo "::set-env name=MAJOR_MINOR_VERSION::$MAJOR_MINOR_VERSION"
+
+          # Extract the minor part from the build number
+          BUILD_NUMBER=$(echo $GITHUB_RUN_NUMBER)
+          MINOR=$(echo $BUILD_NUMBER | cut -d. -f2)
+          echo "::set-env name=MINOR::$MINOR"
