@@ -1,0 +1,54 @@
+# ASP.NET Core
+# Build and test ASP.NET Core web applications targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/vsts/pipelines/languages/dotnet-core
+name: $(majorMinorVersion).$(semanticVersion)$(env)
+
+pool:
+  vmImage: windows-latest
+
+variables:
+  - name: buildConfiguration
+    value: Release
+  - name: majorMinorVersion
+    value: 1.1
+  - name: semanticVersion
+    value: $[counter(variables['majorMinorVersion'], 0)]
+  - name: env
+    ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}:
+      value: ''
+    ${{ if ne(variables['Build.SourceBranch'], 'refs/heads/main') }}:
+      value: '-ci'
+
+steps:
+  - task: DotNetCoreCLI@2
+    displayName: Restore packages
+    inputs:
+      command: restore
+      projects: "**/*.csproj"
+      nuGetFeedType: "internal"
+      vstsFeed: "Framework"
+
+  - task: DotNetCoreCLI@2
+    displayName: Run tests
+    inputs:
+      command: test
+      projects: "**/*Tests.csproj"
+      publishTestResults: "true"
+      arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+
+  - task: DotNetCoreCLI@2
+    displayName: Pack NuGet packages.
+    inputs:
+      command: "pack" # Options: restore, pack, push, custom
+      packagesToPack: "**/WoolworthNZ.Framework.Azure.ServiceBus.csproj" # Required when command == pack
+      versioningScheme: "byBuildNumber"
+
+  - task: NuGetCommand@2
+    displayName: Push to DevOps feed
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+    inputs:
+      command: "push"
+      nuGetFeedType: 'internal' # Required when command == push. Options: internal, external
+      publishVstsFeed: "Framework"
+      packagesToPush: '$(build.artifactStagingDirectory)/*.nupkg' # Required when command == push

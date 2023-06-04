@@ -1,0 +1,8 @@
+# Ignore NuGet packages
+packages/
+
+# Ignore build output
+[Bb]in/
+[Oo]bj/
+
+.idea/

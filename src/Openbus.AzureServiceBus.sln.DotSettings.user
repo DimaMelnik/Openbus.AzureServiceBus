@@ -1,0 +1,13 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=12b61146_002D1043_002D4418_002Db23e_002D7bc28532734c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Session #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;And&gt;
+    &lt;Project Location="/Users/dmitrymenik/Projects/Countdown/WoolworthsNZ.Framework.Azure.ServiceBus/src/WoolworthNZ.Framework.Azure.ServiceBus.UnitTests" Presentation="&amp;lt;WoolworthNZ.Framework.Azure.ServiceBus.UnitTests&amp;gt;" /&gt;
+    &lt;Namespace&gt;WoolworthNZ.Framework.Azure.ServiceBus.UnitTests.Extensions&lt;/Namespace&gt;
+  &lt;/And&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d6f06354_002Dfa00_002D4ddb_002Db6df_002D76d61c20e82f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;And&gt;
+    &lt;Project Location="/Users/dmitrymenik/Projects/Countdown/WoolworthsNZ.Framework.Azure.ServiceBus/src/WoolworthNZ.Framework.Azure.ServiceBus.UnitTests" Presentation="&amp;lt;WoolworthNZ.Framework.Azure.ServiceBus.UnitTests&amp;gt;" /&gt;
+    &lt;Namespace&gt;WoolworthNZ.Framework.Azure.ServiceBus.UnitTests.Extensions&lt;/Namespace&gt;
+  &lt;/And&gt;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
