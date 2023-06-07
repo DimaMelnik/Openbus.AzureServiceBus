@@ -8,7 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    permissions:
+      repository-projects: write
+      statuses: write 
     steps:
     - name: Check version
       id: version-check
