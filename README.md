@@ -1,6 +1,6 @@
 # Openbus.AzureServiceBus 
 ![Build & test](https://github.com/DimaMelnik/Openbus.AzureServiceBus/actions/workflows/dotnet.yml/badge.svg)
-
+[![Publish package](https://github.com/DimaMelnik/Openbus.AzureServiceBus/actions/workflows/publish.yaml/badge.svg)](https://github.com/DimaMelnik/Openbus.AzureServiceBus/actions/workflows/publish.yaml)
 
 # Getting Started
 
