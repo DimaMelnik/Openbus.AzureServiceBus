@@ -10,6 +10,7 @@
     <PropertyGroup>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <Description>Straightforward framework that enables you to establish a format for incoming and publishing messages, determine how messages are converted into models, and conduct validation on incoming messages. It offers support for various retry strategies (such as exponential or immediate) when encountering specific exceptions.</Description>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
