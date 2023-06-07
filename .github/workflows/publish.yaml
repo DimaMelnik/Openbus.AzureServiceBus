@@ -35,6 +35,7 @@ jobs:
     - name: Extract Version
       run: | 
         TAG=${{ github.ref }}
+        echo $TAG >> $GITHUB_ENV
         echo "VERSION=${TAG#refs/tags/v}" >> $GITHUB_ENV
 
     - name: Build solution
@@ -45,7 +46,7 @@ jobs:
       working-directory: src/Openbus.AzureServiceBus
       run: |
         dotnet pack --configuration Release --output ./nuget --version-suffix=$VERSION
-        dotnet nuget push Openbus.AzureServiceBus.*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
+        dotnet nuget push Openbus.AzureServiceBus.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
     
     - name: Create Release
       uses: actions/create-release@master
@@ -53,6 +54,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        release_name: Release v${TAG}
         draft: false
         prerelease: false
