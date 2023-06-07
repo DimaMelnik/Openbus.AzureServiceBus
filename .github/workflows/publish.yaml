@@ -32,12 +32,16 @@ jobs:
       with:
         dotnet-version: 6.0.x
 
+    - name: Extract Version
+      id: extract-version
+      run: echo "VERSION=${{ github.ref#refs/tags/v }}" >> $GITHUB_ENV
+
     - name: Build solution
       working-directory: src/Openbus.AzureServiceBus
-      run: dotnet build --configuration Release
+      run: dotnet build --configuration Release --version-suffix=$VERSION
 
     - name: Publish NuGet packages
-      working-directory: src/Openbus.AzureServiceBus
+      working-directory: src/Openbus.AzureServiceBus --version-suffix=$VERSION
       run: |
         dotnet pack --configuration Release --output ./nuget
         dotnet nuget push Openbus.AzureServiceBus.*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
