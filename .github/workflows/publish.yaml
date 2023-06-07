@@ -42,9 +42,9 @@ jobs:
       run: dotnet build --configuration Release --version-suffix=$VERSION
 
     - name: Publish NuGet packages
-      working-directory: src/Openbus.AzureServiceBus --version-suffix=$VERSION
+      working-directory: src/Openbus.AzureServiceBus
       run: |
-        dotnet pack --configuration Release --output ./nuget
+        dotnet pack --configuration Release --output ./nuget --version-suffix=$VERSION
         dotnet nuget push Openbus.AzureServiceBus.*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
     
     - name: Create Release
