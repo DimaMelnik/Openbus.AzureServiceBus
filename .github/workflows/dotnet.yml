@@ -19,12 +19,14 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: |
-        dotnet restore
+      working-directory: src
+      run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore src/Openbus.AzureServiceBus.sln
+      working-directory: src
+      run: dotnet build --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal src/Openbus.AzureServiceBus.sln
+      working-directory: src
+      run: dotnet test --no-build --verbosity normal
     - name: Set package version
       id: version
       run: |
