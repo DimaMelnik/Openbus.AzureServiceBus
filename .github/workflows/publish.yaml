@@ -35,7 +35,7 @@ jobs:
     - name: Extract Version
       run: | 
         TAG=${{ github.ref }}
-        echo "VERSION=${TAG#v}" >> $GITHUB_ENV
+        echo "VERSION=${TAG#refs/tags/v}" >> $GITHUB_ENV
 
     - name: Build solution
       working-directory: src/Openbus.AzureServiceBus
