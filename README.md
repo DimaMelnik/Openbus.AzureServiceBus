@@ -1,4 +1,6 @@
 # Openbus.AzureServiceBus 
+![Build & test](https://github.com/DimaMelnik/Openbus.AzureServiceBus/actions/workflows/dotnet.yml/badge.svg)
+
 
 # Getting Started
 
