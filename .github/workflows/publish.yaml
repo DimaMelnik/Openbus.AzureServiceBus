@@ -3,7 +3,7 @@ name: Publish package
 on:
   push:
     tags:
-      - '*.*.*' # Push events to matching v*, i.e. 1.0.0, 20.15.10
+      - 'v*' # Push events to matching  i.e. v1.0.0, v20.15.10
 
 jobs:
   build:
@@ -40,7 +40,7 @@ jobs:
       working-directory: src/Openbus.AzureServiceBus
       run: |
         dotnet pack --configuration Release --output ./nuget
-        dotnet nuget push Openbus.AzureServiceBus.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
+        dotnet nuget push Openbus.AzureServiceBus.*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
     
     - name: Create Release
       uses: actions/create-release@master
