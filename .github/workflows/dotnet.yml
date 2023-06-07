@@ -24,7 +24,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore src/Openbus.AzureServiceBus.sln
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal src/Openbus.AzureServiceBus.sln
     - name: Set package version
       id: version
       run: |
