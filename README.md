@@ -60,7 +60,7 @@ services.AddTopicBus<IMyTopic>(context.Configuration.GetSection("ServiceBusOrder
 		{
 			c.SetExponentialRetryOn<Exception>(10, 40000);
 		})
-	.AddWoolworthMessageProcessor();
+	.AddMessageProcessor();
 ```
 or with session
 ```c#
@@ -73,7 +73,7 @@ services.AddTopicBus<IMyTopic>(context.Configuration.GetSection("ServiceBusOrder
 		{
 			c.SetExponentialRetryOn<Exception>(10, 40000);
 		})
-	.AddWoolworthSessionMessageProcessor();
+	.AddSessionMessageProcessor();
 ```
 
 Register your handlers and validators
@@ -87,13 +87,13 @@ Register your queue transport and processor
 ```c#
 services.AddQueueBus<IMyQueue>(context.Configuration.GetSection("ServiceBusQueue"))
 // Register your messages etc
-..AddWoolworthMessageProcessor();
+..AddMessageProcessor();
 ```
 or with session
 ```c#
 services.AddQueueBus<IMyQueue>(context.Configuration.GetSection("ServiceBusQueue"))
 // Register your messages etc
-..AddWoolworthSessionMessageProcessor();
+..AddSessionMessageProcessor();
 ```
 
 # Retry
