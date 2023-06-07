@@ -33,7 +33,6 @@ jobs:
         dotnet-version: 6.0.x
 
     - name: Extract Version
-      id: extract-version
       run: echo "VERSION=${{ github.ref#v }}" >> $GITHUB_ENV
 
     - name: Build solution
