@@ -34,7 +34,8 @@ jobs:
 
     - name: Extract Version
       run: | 
-        echo "TAG=${{ github.ref }}" >> $GITHUB_ENV
+        TAG=${{ github.ref }}
+        echo "TAG=${TAG}" >> $GITHUB_ENV
         echo "VERSION=${TAG#refs/tags/v}" >> $GITHUB_ENV
 
     - name: Build solution
