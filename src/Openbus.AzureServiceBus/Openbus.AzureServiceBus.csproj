@@ -7,6 +7,7 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <Authors>Dmitry Melnik</Authors>
         <PackageDescription>Straightforward framework that enables you to establish a format for incoming and publishing messages, determine how messages are converted into models, and conduct validation on incoming messages. It offers support for various retry strategies (such as exponential or immediate) when encountering specific exceptions.</PackageDescription>
+        <RepositoryUrl>https://github.com/DimaMelnik/Openbus.AzureServiceBus</RepositoryUrl>
     </PropertyGroup>
 
     <PropertyGroup>
