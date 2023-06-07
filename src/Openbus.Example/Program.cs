@@ -72,7 +72,7 @@ namespace Openbus.Example
                     {
                         c.SetExponentialRetryOn<KeyNotFoundException>(1, 1000, 2);
                     })
-                .AddWoolworthMessageProcessor();
+                .AddMessageProcessor();
 
             services.AddTopicBus<IMyTopic>(context.Configuration.GetSection("ServiceBusOrder"))
                 .WithMessage<OrderPlacedEvent>(
@@ -85,7 +85,7 @@ namespace Openbus.Example
                     {
                         c.SetImediateRetryOn<Exception>(2);
                     })
-                .AddWoolworthMessageProcessor();
+                .AddMessageProcessor();
             
             services.AddTopicBus<IMySessionTopic>(context.Configuration.GetSection("ServiceBusOrderSessions"))
                 .WithMessage<OrderPlacedEvent, OrderState>(
@@ -98,7 +98,7 @@ namespace Openbus.Example
                     { 
                         c.SetImediateRetryOn<Exception>(2);
                     })
-                .AddWoolworthSessionMessageProcessor();
+                .AddSessionMessageProcessor();
         }
 
         public static void ConfigureServices(HostBuilderContext context, IServiceCollection services)

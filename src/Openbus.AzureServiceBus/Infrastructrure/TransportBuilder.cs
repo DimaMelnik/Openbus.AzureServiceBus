@@ -127,13 +127,13 @@ namespace Openbus.AzureServiceBus.Infrastructrure
         }
 
 
-        public void AddWoolworthMessageProcessor()
+        public void AddMessageProcessor()
         {
             _services.AddSingleton<IServiceBusProcessorFactory<TBus>, ServiceBusProcessorFactory<TBus>>();
             _services.AddHostedService<MessageProcessorService<TBus>>();
         }
 
-        public void AddWoolworthSessionMessageProcessor()
+        public void AddSessionMessageProcessor()
         {
             _services.AddSingleton<IServiceBusProcessorFactory<TBus>, ServiceBusProcessorFactory<TBus>>();
             _services.AddHostedService<MessageSessionProcessorService<TBus>>();
