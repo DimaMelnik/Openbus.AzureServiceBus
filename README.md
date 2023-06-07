@@ -53,7 +53,7 @@ In service registration add your transport and messages
 services.AddTopicBus<IMyTopic>(context.Configuration.GetSection("ServiceBusOrder"))
 	.WithMessage<TestEvent>(
 		c =>
-        {
+        	{
 
 		},
 	    c =>
