@@ -8,24 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      repository-projects: write
-      statuses: write 
+    
     steps:
-    - name: Check version
-      id: version-check
-      run: |
-        echo "Previous version: ${{ github.event.before }}"
-        echo "New version: ${{ github.event.after }}"
-        IFS='.' read -ra prev_version <<< "${{ github.event.before }}"
-        IFS='.' read -ra new_version <<< "${{ github.event.after }}"
-        if [ ${new_version[0]} -gt ${prev_version[0]} ] || [ ${new_version[1]} -gt ${prev_version[1]} ] || [ ${new_version[2]} -gt ${prev_version[2]} ]; then
-          echo "::set-output name=version-changed::true"
-        else
-          echo "::set-output name=version-changed::false"
-          echo "Version was not incremented as expected. Stopping workflow..."
-          exit 1
-        fi
     - name: Checkout code
       uses: actions/checkout@v2
 
@@ -40,17 +24,18 @@ jobs:
         echo "TAG=${TAG}" >> $GITHUB_ENV
         echo "VERSION=${TAG#refs/tags/v}" >> $GITHUB_ENV
 
-    - name: Build and pack 
-      working-directory: src/Openbus.AzureServiceBus
-      run: |
-        dotnet build --configuration Release --version-suffix=$VERSION
-        dotnet pack --configuration Release --output ./nuget --version-suffix=$VERSION
+    # - name: Build and pack 
+    #   working-directory: src/Openbus.AzureServiceBus
+    #   run: |
+    #     dotnet build --configuration Release --version-suffix=$VERSION
+    #     dotnet pack --configuration Release --output ./nuget --version-suffix=$VERSION
 
     - name: Publish NuGet packages
       working-directory: src/Openbus.AzureServiceBus/nuget
       run: dotnet nuget push Openbus.AzureServiceBus.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
     
     - name: Create Release
+      id: create_release
       uses: actions/create-release@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
